@@ -6,22 +6,13 @@ import Split from 'react-split';
 import { nanoid } from 'nanoid';
 
 export default function App() {
-	/**
-	 * Challenge:
-	 * 1. Every time the `notes` array changes, save it
-	 *    in localStorage. You'll need to use JSON.stringify()
-	 *    to turn the array into a string to save in localStorage.
-	 * 2. When the app first loads, initialize the notes state
-	 *    with the notes saved in localStorage. You'll need to
-	 *    use JSON.parse() to turn the stringified array back
-	 *    into a real JS array.
-	 */
+	const [notes, setNotes] = React.useState(
+		() => JSON.parse(localStorage.getItem('notes')) || []
+	);
 
 	React.useEffect(() => {
-		setNotes(JSON.parse(localStorage.getItem('notes')));
-	}, []);
-
-	const [notes, setNotes] = React.useState([]);
+		localStorage.setItem('notes', JSON.stringify(notes));
+	}, [notes]);
 	const [currentNoteId, setCurrentNoteId] = React.useState(
 		(notes[0] && notes[0].id) || ''
 	);
@@ -33,18 +24,20 @@ export default function App() {
 		};
 		setNotes((prevNotes) => [newNote, ...prevNotes]);
 		setCurrentNoteId(newNote.id);
-		localStorage.setItem('notes', JSON.stringify(notes));
 	}
 
 	function updateNote(text) {
-		setNotes((oldNotes) =>
-			oldNotes.map((oldNote) => {
-				return oldNote.id === currentNoteId
-					? { ...oldNote, body: text }
-					: oldNote;
-			})
-		);
-		localStorage.setItem('notes', JSON.stringify(notes));
+		setNotes((oldNotes) => {
+			const newArray = [];
+			for (let note of oldNotes) {
+				if (note.id === currentNoteId) {
+					newArray.unshift({ ...note, body: text });
+				} else {
+					newArray.push(note);
+				}
+			}
+			return newArray;
+		});
 	}
 
 	function findCurrentNote() {
@@ -53,6 +46,11 @@ export default function App() {
 				return note.id === currentNoteId;
 			}) || notes[0]
 		);
+	}
+
+	function deleteNote(event, noteId) {
+		event.stopPropagation();
+		setNotes((oldNotes) => oldNotes.filter((note) => note.id !== noteId));
 	}
 
 	return (
@@ -64,6 +62,7 @@ export default function App() {
 						currentNote={findCurrentNote()}
 						setCurrentNoteId={setCurrentNoteId}
 						newNote={createNewNote}
+						deleteNote={deleteNote}
 					/>
 					{currentNoteId && notes.length > 0 && (
 						<Editor currentNote={findCurrentNote()} updateNote={updateNote} />
