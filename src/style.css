@@ -1,15 +1,115 @@
 * {
 	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 
 body {
 	margin: 0;
 	padding: 0;
-	font-family: 'Karla', sans-serif;
+	font-family: 'Inter', sans-serif;
+	color: #303030;
 }
 
-button:focus {
-	outline: none;
+.container {
+	display: flex;
+	height: 100vh;
+	width: 100vw;
+}
+
+/* Nav */
+
+nav {
+	background: #f6f6f6;
+	padding: 40px 23px;
+	min-width: 258px;
+}
+
+.logo {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.logo img {
+	width: 32px;
+}
+
+.logo-text {
+	font-family: 'Aclonica';
+	font-size: 15px;
+	color: #ec7160;
+}
+
+.nav-container {
+	margin-top: 38px;
+	display: grid;
+	place-items: left;
+	gap: 14px;
+}
+
+.nav-container a {
+	padding-left: 12px;
+	text-decoration: none;
+	font-size: 16px;
+	line-height: 27px;
+	color: #898989;
+	transition: color 0.3s;
+}
+
+.nav-container a.active {
+	border-left: 3px solid #ec7160;
+	color: #303030;
+	padding-left: 9px;
+}
+
+.nav-container a:hover {
+	color: #303030;
+}
+
+/* Home */
+
+.home-page {
+	margin-top: 97px;
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 30px;
+}
+
+.home-page h1 {
+	font-weight: 400;
+	font-size: 26px;
+	line-height: 31px;
+}
+
+.home-page p {
+	font-size: 16px;
+	line-height: 27px;
+	text-align: center;
+	max-width: 600px;
+}
+
+.home-page img {
+	max-width: 290px;
+}
+
+.home-page button {
+	border: #ec7160 1px solid;
+	cursor: pointer;
+	color: #ffffff;
+	font-size: 13px;
+	line-height: 20px;
+	padding: 9px 83px;
+	background-color: #ec7160;
+	border-radius: 7px;
+	transition: color 0.3s, background-color 0.3s;
+}
+
+.home-page button:hover {
+	background: #f6f6f6;
+	color: #ec7160;
 }
 
 .ql-editor p,
@@ -138,6 +238,8 @@ button:focus {
 	align-items: center;
 	background-color: whitesmoke;
 }
+
+/* Trash icon */
 
 .delete-btn {
 	display: none;
