@@ -76,6 +76,7 @@ nav {
 	flex-direction: column;
 	align-items: center;
 	gap: 30px;
+	text-align: center;
 }
 
 .home-page h1 {
@@ -87,7 +88,6 @@ nav {
 .home-page p {
 	font-size: 16px;
 	line-height: 27px;
-	text-align: center;
 	max-width: 600px;
 }
 
@@ -96,11 +96,11 @@ nav {
 }
 
 .home-page button {
+	font-family: inherit;
 	border: #ec7160 1px solid;
 	cursor: pointer;
 	color: #ffffff;
 	font-size: 13px;
-	line-height: 20px;
 	padding: 9px 83px;
 	background-color: #ec7160;
 	border-radius: 7px;
@@ -108,8 +108,76 @@ nav {
 }
 
 .home-page button:hover {
-	background: #f6f6f6;
+	background: #ffffff;
 	color: #ec7160;
+}
+
+.highlight {
+	color: #ec7160;
+}
+
+/* Contact */
+
+.contact {
+	margin-top: 61px;
+	max-width: 600px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 36px;
+	margin-inline: auto;
+	height: fit-content;
+}
+
+.contact h2 {
+	font-weight: 700;
+	font-size: 16px;
+}
+
+.contact label {
+	display: block;
+	font-size: 13px;
+	color: #898989;
+	margin-bottom: 9px;
+}
+
+.contact input {
+	width: 100%;
+	height: 45px;
+	background: #f6f6f6;
+	border-radius: 7px;
+	border: none;
+	text-indent: 8px;
+}
+
+.contact textarea {
+	width: 100%;
+	height: 135px;
+	background: #f6f6f6;
+	border-radius: 7px;
+	border: none;
+	padding: 8px;
+}
+
+.contact button {
+	font-family: inherit;
+	border: #ec7160 1px solid;
+	cursor: pointer;
+	color: #ffffff;
+	font-size: 13px;
+	width: fit-content;
+	padding: 9px 15px;
+	background-color: #ec7160;
+	border-radius: 7px;
+	transition: color 0.3s, background-color 0.3s;
+}
+
+.contact button:hover {
+	background: #ffffff;
+	color: #ec7160;
+}
+
+.span-two {
+	grid-column: span 2;
 }
 
 .ql-editor p,
@@ -229,6 +297,11 @@ nav {
 	display: flex;
 }
 
+main {
+	flex: 1;
+	width: 100%;
+}
+
 .no-notes {
 	width: 100%;
 	height: 100vh;
@@ -236,7 +309,6 @@ nav {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	background-color: whitesmoke;
 }
 
 /* Trash icon */
@@ -295,4 +367,10 @@ nav {
 	border-top-right-radius: 2px;
 	top: -7px;
 	left: -2px;
+}
+
+@media screen and (max-width: 1000px) {
+	nav {
+		min-width: 130px;
+	}
 }
