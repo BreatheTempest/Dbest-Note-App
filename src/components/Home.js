@@ -14,7 +14,9 @@ export default function Home() {
 				<span className="highlight">sem pellentesque</span> laoreet.{' '}
 			</p>
 			<img src={orange} alt="" />
-			<button onClick={() => navigate('notes')}>Go to Notes</button>
+			<button className="button" onClick={() => navigate('notes')}>
+				Go to Notes
+			</button>
 		</section>
 	);
 }
