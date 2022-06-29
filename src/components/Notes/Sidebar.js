@@ -1,6 +1,7 @@
 import React from 'react';
 
 export default function Sidebar(props) {
+	console.log(props);
 	const noteElements = props.notes.map((note, index) => (
 		<div key={note.id}>
 			<div
@@ -12,6 +13,7 @@ export default function Sidebar(props) {
 				<h4 className="text-snippet">
 					{note.body.split('\n')[0] || `Empty note ${index + 1}`}
 				</h4>
+				<p>{note.date}</p>
 				<button
 					className="delete-btn"
 					onClick={(e) => props.deleteNote(e, note.id)}
@@ -21,16 +23,13 @@ export default function Sidebar(props) {
 			</div>
 		</div>
 	));
-
 	return (
 		<section className="pane sidebar">
-			<div className="sidebar--header">
-				<h3>Notes</h3>
-				<button className="new-note" onClick={props.newNote}>
-					+
-				</button>
-			</div>
-			{noteElements}
+			<button className="button" onClick={props.newNote}>
+				Create Note
+			</button>
+			<h3>Notes</h3>
+			<div className="notes">{noteElements}</div>
 		</section>
 	);
 }

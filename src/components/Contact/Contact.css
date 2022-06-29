@@ -1,0 +1,41 @@
+.contact {
+	margin-top: 61px;
+	max-width: 600px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 36px;
+	margin-inline: auto;
+	height: fit-content;
+}
+
+.contact h2 {
+	font-weight: 700;
+	font-size: 16px;
+}
+
+.contact label {
+	display: block;
+	font-size: 13px;
+	color: #898989;
+	margin-bottom: 9px;
+}
+
+.contact input {
+	height: 45px;
+	text-indent: 8px;
+}
+
+.contact textarea {
+	max-width: 600px;
+	height: 135px;
+	padding: 8px;
+}
+
+.contact .button {
+	padding-inline: 16px;
+	width: fit-content;
+}
+
+.span-two {
+	grid-column: span 2;
+}

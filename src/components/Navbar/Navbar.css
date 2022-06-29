@@ -1,0 +1,53 @@
+nav {
+	background: #f6f6f6;
+	padding: 40px 23px;
+	min-width: 258px;
+}
+
+.logo {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.logo img {
+	width: 32px;
+}
+
+.logo-text {
+	font-family: 'Aclonica';
+	font-size: 15px;
+	color: #ec7160;
+}
+
+.nav-container {
+	margin-top: 38px;
+	display: grid;
+	place-items: left;
+	gap: 14px;
+}
+
+.nav-container a {
+	padding-left: 12px;
+	text-decoration: none;
+	font-size: 16px;
+	line-height: 27px;
+	color: #898989;
+	transition: color 0.3s;
+}
+
+.nav-container a.active {
+	border-left: 3px solid #ec7160;
+	color: #303030;
+	padding-left: 9px;
+}
+
+.nav-container a:hover {
+	color: #303030;
+}
+
+@media screen and (max-width: 1000px) {
+	nav {
+		min-width: 130px;
+	}
+}
