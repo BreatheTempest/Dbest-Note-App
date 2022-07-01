@@ -10,7 +10,9 @@ export default function App() {
 			<Navbar />
 			<Routes>
 				<Route path="/" element={<Home />} />
-				<Route path="/notes" element={<Notes />} />
+				<Route path="/notes" element={<Notes />}>
+					<Route path=":note" element={<Notes />} />
+				</Route>
 				<Route path="/contact" element={<Contact />} />
 			</Routes>
 		</div>

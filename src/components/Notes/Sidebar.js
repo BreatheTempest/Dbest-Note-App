@@ -1,9 +1,10 @@
 import React from 'react';
 import remove from '../../images/remove.svg';
+import { Link } from 'react-router-dom';
 
 export default function Sidebar(props) {
 	const noteElements = props.notes.map((note, index) => (
-		<div key={note.id}>
+		<Link to={note.title} key={note.id}>
 			<div
 				className={`note ${
 					note.id === props.currentNote.id ? 'selected-note' : ''
@@ -25,7 +26,7 @@ export default function Sidebar(props) {
 				</p>
 				<p className="note-date">{note.date}</p>
 			</div>
-		</div>
+		</Link>
 	));
 	return (
 		<section className="pane sidebar">

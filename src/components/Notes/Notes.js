@@ -33,7 +33,7 @@ export default function Notes() {
 			id: nanoid(),
 			body: 'Compose an epic...',
 			date: `${new Intl.DateTimeFormat('en-US', options).format(date)}`,
-			title: `New Note`,
+			title: `New Note ${notes.length + 1}`,
 		};
 		setNotes((prevNotes) => [newNote, ...prevNotes]);
 		setCurrentNoteId(newNote.id);
