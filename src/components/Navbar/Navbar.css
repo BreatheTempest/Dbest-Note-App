@@ -2,6 +2,7 @@ nav {
 	background: #f6f6f6;
 	padding: 40px 23px;
 	min-width: 258px;
+	z-index: 1;
 }
 
 .logo {

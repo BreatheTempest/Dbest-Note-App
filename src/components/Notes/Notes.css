@@ -33,13 +33,15 @@
 .sidebar {
 	width: 20%;
 	height: 100vh;
+	border-right: 1px solid #e7e7e9;
+	animation: slide-animation 0.3s;
 }
 
 .sidebar .button {
 	display: block;
 	width: 70%;
 	margin: 78px auto 43px auto;
-	animation: notes-animation 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+	animation: slide-animation 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
 
 .sidebar h3 {
@@ -64,7 +66,7 @@
 .note {
 	padding: 10px 16px;
 	position: relative;
-	animation: notes-animation cubic-bezier(0.18, 0.89, 0.32, 1.28);
+	animation: slide-animation cubic-bezier(0.18, 0.89, 0.32, 1.28);
 	transition: background-color 0.5s;
 }
 
@@ -103,25 +105,43 @@
 	border-radius: 8px;
 }
 
-@keyframes notes-animation {
+@keyframes slide-animation {
 	from {
-		transform: translateX(-50%);
+		transform: translateX(-50px);
 	}
 	to {
 		transform: translateX(0);
 	}
 }
 
-/* Gutter */
-
-.gutter {
-	background-color: #e7e7e9;
+.chevron {
+	cursor: pointer;
+	border-radius: 50%;
+	height: 28px;
+	width: 28px;
+	margin-left: -14px;
+	margin-top: 118px;
+	border: 1px solid #e7e7e9;
+	background-color: white;
+	display: grid;
+	place-items: center;
+	transition: background-color 0.3s;
+	animation: slide-animation 0.3s;
+	z-index: 2;
 }
 
-.gutter.gutter-horizontal:hover {
-	cursor: col-resize;
+.chevron:hover {
+	background-color: #ec7160;
 }
 
+.chevron img {
+	width: 70%;
+	transition: transform 0.5s;
+}
+
+.chevron img.closed {
+	transform: rotate(180deg);
+}
 /* Trash icon */
 
 .delete-btn {

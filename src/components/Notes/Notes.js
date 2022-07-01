@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import Sidebar from './Sidebar';
 import Editor from './Editor';
-import Split from 'react-split';
 import './Notes.css';
+import chevron from '../../images/chevron.svg';
 
 export default function Notes() {
 	const [notes, setNotes] = useState(
@@ -19,6 +19,8 @@ export default function Notes() {
 	);
 
 	const [currentTitle, setCurrentTitle] = useState();
+
+	const [sidebarOpen, setSidebarOpen] = useState(true);
 
 	function createNewNote() {
 		const options = {
@@ -88,21 +90,23 @@ export default function Notes() {
 	return (
 		<main>
 			{notes.length > 0 ? (
-				<Split
-					sizes={[25, 75]}
-					direction="horizontal"
-					className="split"
-					gutterStyle={() => ({
-						width: '1px',
-					})}
-				>
-					<Sidebar
-						notes={notes}
-						currentNote={findCurrentNote()}
-						setCurrentNoteId={setCurrentNoteId}
-						newNote={createNewNote}
-						deleteNote={deleteNote}
-					/>
+				<>
+					{sidebarOpen && (
+						<Sidebar
+							notes={notes}
+							currentNote={findCurrentNote()}
+							setCurrentNoteId={setCurrentNoteId}
+							newNote={createNewNote}
+							deleteNote={deleteNote}
+							sidebarOpen={sidebarOpen}
+						/>
+					)}
+					<button
+						className="chevron"
+						onClick={() => setSidebarOpen((prevStatus) => !prevStatus)}
+					>
+						<img src={chevron} className={!sidebarOpen && 'closed'} alt="" />
+					</button>
 					{currentNoteId && notes.length > 0 && (
 						<Editor
 							currentNote={findCurrentNote()}
@@ -111,7 +115,7 @@ export default function Notes() {
 							title={currentTitle}
 						/>
 					)}
-				</Split>
+				</>
 			) : (
 				<div className="no-notes">
 					<h1>You have no notes</h1>
