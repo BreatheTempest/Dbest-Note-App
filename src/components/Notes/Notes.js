@@ -13,9 +13,12 @@ export default function Notes() {
 	useEffect(() => {
 		localStorage.setItem('notes', JSON.stringify(notes));
 	}, [notes]);
+
 	const [currentNoteId, setCurrentNoteId] = useState(
 		(notes[0] && notes[0].id) || ''
 	);
+
+	const [currentTitle, setCurrentTitle] = useState();
 
 	function createNewNote() {
 		const options = {
@@ -30,6 +33,7 @@ export default function Notes() {
 			id: nanoid(),
 			body: 'Compose an epic...',
 			date: `${new Intl.DateTimeFormat('en-US', options).format(date)}`,
+			title: `New Note`,
 		};
 		setNotes((prevNotes) => [newNote, ...prevNotes]);
 		setCurrentNoteId(newNote.id);
@@ -41,6 +45,20 @@ export default function Notes() {
 			for (let note of oldNotes) {
 				if (note.id === currentNoteId) {
 					newArray.unshift({ ...note, body: text });
+				} else {
+					newArray.push(note);
+				}
+			}
+			return newArray;
+		});
+	}
+
+	function updateTitle(e) {
+		setNotes((oldNotes) => {
+			const newArray = [];
+			for (let note of oldNotes) {
+				if (note.id === currentNoteId) {
+					newArray.unshift({ ...note, title: e.target.value });
 				} else {
 					newArray.push(note);
 				}
@@ -62,6 +80,11 @@ export default function Notes() {
 		setNotes((oldNotes) => oldNotes.filter((note) => note.id !== noteId));
 	}
 
+	useEffect(() => {
+		const currentNote = findCurrentNote();
+		setCurrentTitle(currentNote ? currentNote.title : 'New Note');
+	}, [notes, currentNoteId]);
+
 	return (
 		<main>
 			{notes.length > 0 ? (
@@ -81,7 +104,12 @@ export default function Notes() {
 						deleteNote={deleteNote}
 					/>
 					{currentNoteId && notes.length > 0 && (
-						<Editor currentNote={findCurrentNote()} updateNote={updateNote} />
+						<Editor
+							currentNote={findCurrentNote()}
+							updateNote={updateNote}
+							updateTitle={updateTitle}
+							title={currentTitle}
+						/>
 					)}
 				</Split>
 			) : (

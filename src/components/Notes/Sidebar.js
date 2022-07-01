@@ -9,18 +9,21 @@ export default function Sidebar(props) {
 					note.id === props.currentNote.id ? 'selected-note' : ''
 				}`}
 				onClick={() => props.setCurrentNoteId(note.id)}
+				style={{ animationDuration: `${0.5 + index / 10}s` }}
 			>
-				<h2 className="note-title">Title</h2>
+				<div className="top-row">
+					<h2 className="note-title">{note.title}</h2>
+					<button
+						className="delete-btn"
+						onClick={(e) => props.deleteNote(e, note.id)}
+					>
+						<img src={remove} alt="" />
+					</button>
+				</div>
 				<p className="note-description">
 					{note.body.split('\n')[0].match(/[\w\s.,]/g, '') || `Empty note`}
 				</p>
 				<p className="note-date">{note.date}</p>
-				<button
-					className="delete-btn"
-					onClick={(e) => props.deleteNote(e, note.id)}
-				>
-					<img src={remove} alt="" />
-				</button>
 			</div>
 		</div>
 	));

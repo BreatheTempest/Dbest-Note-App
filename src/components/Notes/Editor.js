@@ -3,7 +3,12 @@ import ReactMde from 'react-mde';
 import Showdown from 'showdown';
 import { getDefaultToolbarCommands } from 'react-mde';
 
-export default function Editor({ currentNote, updateNote }) {
+export default function Editor({
+	currentNote,
+	updateNote,
+	title,
+	updateTitle,
+}) {
 	const [selectedTab, setSelectedTab] = React.useState('write');
 
 	const converter = new Showdown.Converter({
@@ -17,6 +22,13 @@ export default function Editor({ currentNote, updateNote }) {
 
 	return (
 		<section className="pane editor">
+			<input
+				className="editor-title"
+				type="text"
+				placeholder="New Note"
+				value={title}
+				onChange={(e) => updateTitle(e)}
+			/>
 			<ReactMde
 				value={currentNote.body}
 				onChange={updateNote}

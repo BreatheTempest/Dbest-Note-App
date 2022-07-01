@@ -39,6 +39,7 @@
 	display: block;
 	width: 70%;
 	margin: 78px auto 43px auto;
+	animation: notes-animation 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
 
 .sidebar h3 {
@@ -59,6 +60,12 @@
 .note {
 	padding: 10px 16px;
 	position: relative;
+	animation: notes-animation cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+.top-row {
+	display: flex;
+	justify-content: space-between;
 }
 
 .note-title {
@@ -69,6 +76,7 @@
 }
 
 .note-description {
+	margin-top: 3px;
 	color: #898989;
 	line-height: 1.2rem;
 	font-size: 13px;
@@ -79,6 +87,7 @@
 }
 
 .note-date {
+	margin-top: 8px;
 	font-size: 13px;
 	line-height: 20px;
 	color: #898989;
@@ -89,22 +98,16 @@
 	border-radius: 8px;
 }
 
-/* Editor */
-
-.ql-editor p,
-.ql-editor.ql-blank::before {
-	font-size: 1.3em;
-	font-weight: 100;
+@keyframes notes-animation {
+	from {
+		transform: translateX(-50%);
+	}
+	to {
+		transform: translateX(0);
+	}
 }
 
-.note-summary:not(:last-of-type) {
-	border-bottom: 1px solid lightgray;
-}
-
-.selected-note .text-snippet {
-	color: white;
-	font-weight: 700;
-}
+/* Gutter */
 
 .gutter {
 	background-color: #e7e7e9;
@@ -120,19 +123,22 @@
 	display: none;
 	background: none;
 	border: none;
-	position: absolute;
 	cursor: pointer;
-	right: 0;
-	top: 0;
+	border-radius: 8px;
+	padding: 3px;
+	transition: background-color 0.3s;
 }
 
 .delete-btn img {
-	width: 40px;
-	padding: 4px;
+	height: 16px;
 }
 
-.note:hover > .delete-btn {
+.note:hover .delete-btn {
 	display: block;
+}
+
+.delete-btn:hover {
+	background-color: #ec7160;
 }
 
 /* Editor */
@@ -140,6 +146,15 @@
 .editor {
 	padding: 16px;
 	width: 80%;
+}
+
+.editor-title {
+	border: none;
+	margin: 6px;
+}
+
+.editor-title:focus {
+	outline: none;
 }
 
 .react-mde {
@@ -181,4 +196,8 @@
 
 .mde-textarea-wrapper {
 	border: 1px solid #d2d2d2;
+}
+
+.mde-preview {
+	border: 1px solid #fff;
 }
