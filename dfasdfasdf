@@ -1,0 +1,71 @@
+[33mcommit df592aa6b3140f882ea4d7cab21b1faaa71b87fb[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Anton Zabulonov <zabulonov.a@gmail.com>
+Date:   Fri Jul 1 19:00:51 2022 +0300
+
+    Add closing sidebar functionality
+
+[33mcommit 30f0c7549d40d327db9d5a7929ae5e6f42a77d8e[m
+Author: Anton Zabulonov <zabulonov.a@gmail.com>
+Date:   Fri Jul 1 18:18:22 2022 +0300
+
+    Add routing to each note
+
+[33mcommit de4a0b73d0c0d7f22818f5dca9a907ce02329af9[m
+Author: Anton Zabulonov <zabulonov.a@gmail.com>
+Date:   Fri Jul 1 17:51:17 2022 +0300
+
+    Add title renaming, notes animation
+
+[33mcommit f3a789e432417f98ec60be5de201a6308939467c[m
+Author: Anton Zabulonov <zabulonov.a@gmail.com>
+Date:   Wed Jun 29 21:47:16 2022 +0300
+
+    Add styling to the sidebar
+
+[33mcommit 36aa77d332403ba4d5472d9b6f84db824b466a02[m
+Author: Anton Zabulonov <zabulonov.a@gmail.com>
+Date:   Wed Jun 29 19:21:20 2022 +0300
+
+    Add editor styling and note creation date
+
+[33mcommit 7f3413c8a2def8e0f98f1e900209a239555c8692[m
+Author: Anton Zabulonov <zabulonov.a@gmail.com>
+Date:   Wed Jun 29 15:10:19 2022 +0300
+
+    Add controlled inputs
+
+[33mcommit 376a4ce8cd3554b491660a0c2431030ab1fa910e[m
+Author: Anton Zabulonov <zabulonov.a@gmail.com>
+Date:   Tue Jun 28 17:23:30 2022 +0300
+
+    Add contact page
+
+[33mcommit 0c4d5aff9367f3fcba7396d9594b36dc9170df1a[m
+Author: Anton Zabulonov <zabulonov.a@gmail.com>
+Date:   Tue Jun 28 12:56:49 2022 +0300
+
+    Add Navbar and homepage
+
+[33mcommit 84866559c5afb99a5864697138112197a475d571[m
+Author: Anton Zabulonov <zabulonov.a@gmail.com>
+Date:   Wed Jun 22 15:50:31 2022 +0300
+
+    Add delete functionality, bump edited to the top
+
+[33mcommit 3723f1d9b63194da4fad53c0c006098881fb61c1[m
+Author: Anton Zabulonov <zabulonov.a@gmail.com>
+Date:   Wed Jun 22 10:55:18 2022 +0300
+
+    Add ability to save notes to local storage
+
+[33mcommit ce8fcc1879cdfb3da5147c17da701c85e800b19e[m
+Author: Anton Zabulonov <zabulonov.a@gmail.com>
+Date:   Wed Jun 22 10:20:29 2022 +0300
+
+    Create boilerplate for note app
+
+[33mcommit 4ca2f966015712cafa78deb46033899110ffcd6a[m
+Author: Anton Zabulonov <zabulonov.a@gmail.com>
+Date:   Wed Jun 22 10:05:12 2022 +0300
+
+    Initialize project using Create React App

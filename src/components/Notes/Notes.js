@@ -102,10 +102,14 @@ export default function Notes() {
 						/>
 					)}
 					<button
-						className="chevron"
+						className={`chevron `}
 						onClick={() => setSidebarOpen((prevStatus) => !prevStatus)}
 					>
-						<img src={chevron} className={!sidebarOpen && 'closed'} alt="" />
+						<img
+							src={chevron}
+							className={!sidebarOpen ? 'closed' : ''}
+							alt=""
+						/>
 					</button>
 					{currentNoteId && notes.length > 0 && (
 						<Editor

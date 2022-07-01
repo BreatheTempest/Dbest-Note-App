@@ -29,7 +29,7 @@ export default function Sidebar(props) {
 		</Link>
 	));
 	return (
-		<section className="pane sidebar">
+		<section className={`pane sidebar`}>
 			<button className="button" onClick={props.newNote}>
 				Create Note
 			</button>

@@ -142,6 +142,7 @@
 .chevron img.closed {
 	transform: rotate(180deg);
 }
+
 /* Trash icon */
 
 .delete-btn {

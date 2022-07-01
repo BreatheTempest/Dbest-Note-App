@@ -6,11 +6,29 @@
 	gap: 36px;
 	margin-inline: auto;
 	height: fit-content;
+	position: relative;
 }
 
 .contact h2 {
 	font-weight: 700;
 	font-size: 16px;
+}
+
+.label {
+	display: flex;
+	justify-content: space-between;
+}
+
+.label p {
+	font-size: 14px;
+	color: #ec7160;
+	transform: translateY(30px);
+	transition: transform 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+	z-index: -1;
+}
+
+.label p.visible {
+	transform: translateY(0);
 }
 
 .contact label {
@@ -23,6 +41,12 @@
 .contact input {
 	height: 45px;
 	text-indent: 8px;
+}
+
+.contact input:focus,
+.contact textarea:focus {
+	outline: none;
+	box-shadow: 0px 2px 5px 1px rgb(0 0 0 /0.3);
 }
 
 .contact textarea {
@@ -38,4 +62,35 @@
 
 .span-two {
 	grid-column: span 2;
+}
+
+.success {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	padding: 32px;
+	border-radius: 8px;
+	width: 50%;
+	box-shadow: 0px 3px 10px 2px rgb(0 0 0 /0.3);
+	transition: margin-left 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+	margin-left: -100vw;
+}
+
+.visible {
+	margin-left: 0;
+}
+
+.success h2 {
+	font-weight: 700;
+	font-size: 20px;
+}
+.success p {
+	margin-top: 8px;
+	color: #898989;
+}
+
+.success button {
+	margin-top: 32px;
 }
