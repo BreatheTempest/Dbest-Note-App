@@ -74,12 +74,14 @@
 	border-radius: 8px;
 	width: 50%;
 	box-shadow: 0px 3px 10px 2px rgb(0 0 0 /0.3);
-	transition: margin-left 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-	margin-left: -100vw;
+	transition: margin-top 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28), opacity 0.5s;
+	margin-top: -100%;
+	opacity: 0;
 }
 
-.visible {
-	margin-left: 0;
+.success.visible {
+	margin-top: 0;
+	opacity: 1;
 }
 
 .success h2 {
