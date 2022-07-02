@@ -2,7 +2,7 @@ import React from 'react';
 import App from './App';
 import './style.css';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, HashRouter } from 'react-router-dom';
 import { initializeApp } from 'firebase/app';
 import { collection, getDocs, getFirestore } from 'firebase/firestore';
 
@@ -36,8 +36,8 @@ getDocs(colRef)
 
 root.render(
 	<React.StrictMode>
-		<BrowserRouter>
+		<HashRouter>
 			<App />
-		</BrowserRouter>
+		</HashRouter>
 	</React.StrictMode>
 );
