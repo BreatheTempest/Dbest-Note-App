@@ -17,10 +17,25 @@
 	font-weight: 400;
 	font-size: 26px;
 	line-height: 31px;
+	transform: translateY(-30px);
+	opacity: 0;
+	animation: slide-animation-no-notes 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28)
+		forwards;
 }
 
 .no-notes .button {
 	padding-inline: 16px;
+	transform: translateY(30px);
+	opacity: 0;
+	animation: slide-animation-no-notes 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28)
+		forwards;
+}
+
+@keyframes slide-animation-no-notes {
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
 }
 
 /* Sidebar */

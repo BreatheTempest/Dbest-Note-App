@@ -4,6 +4,7 @@ import Sidebar from './Sidebar';
 import Editor from './Editor';
 import './Notes.css';
 import chevron from '../../images/chevron.svg';
+import { useNavigate } from 'react-router-dom';
 
 export default function Notes() {
 	const [notes, setNotes] = useState(
@@ -21,6 +22,8 @@ export default function Notes() {
 	const [currentTitle, setCurrentTitle] = useState();
 
 	const [sidebarOpen, setSidebarOpen] = useState(true);
+
+	const navigate = useNavigate();
 
 	function createNewNote() {
 		const options = {

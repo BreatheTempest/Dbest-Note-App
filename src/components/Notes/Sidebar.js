@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 export default function Sidebar(props) {
 	const noteElements = props.notes.map((note, index) => (
-		<Link to={note.title} key={note.id}>
+		<Link to={note.id} key={note.id}>
 			<div
 				className={`note ${
 					note.id === props.currentNote.id ? 'selected-note' : ''

@@ -26,8 +26,24 @@
 
 .home-page button {
 	padding-inline: 83px;
+	animation: slide-animation-home 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
 
 .highlight {
 	color: #ec7160;
+	display: inline-block;
+	animation: slide-animation-home 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28) 0.3s
+		forwards;
+	opacity: 0;
+}
+
+@keyframes slide-animation-home {
+	from {
+		transform: translateY(30px);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
 }
