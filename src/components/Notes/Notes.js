@@ -19,8 +19,6 @@ export default function Notes() {
 		(notes[0] && notes[0].id) || ''
 	);
 
-	const [currentTitle, setCurrentTitle] = useState();
-
 	const [sidebarOpen, setSidebarOpen] = useState(true);
 
 	const navigate = useNavigate();
@@ -59,7 +57,11 @@ export default function Notes() {
 			const newArray = [];
 			for (let note of oldNotes) {
 				if (note.id === currentNoteId) {
-					newArray.unshift({ ...note, body: text });
+					if (typeof text === 'string')
+						newArray.unshift({ ...note, body: text });
+					else {
+						newArray.unshift({ ...note, title: text.target.value });
+					}
 				} else {
 					newArray.push(note);
 				}
@@ -68,18 +70,9 @@ export default function Notes() {
 		});
 	}
 
-	function updateTitle(e) {
-		setNotes((oldNotes) => {
-			const newArray = [];
-			for (let note of oldNotes) {
-				if (note.id === currentNoteId) {
-					newArray.unshift({ ...note, title: e.target.value });
-				} else {
-					newArray.push(note);
-				}
-			}
-			return newArray;
-		});
+	function deleteNote(event, noteId) {
+		event.stopPropagation();
+		setNotes((oldNotes) => oldNotes.filter((note) => note.id !== noteId));
 	}
 
 	function findCurrentNote() {
@@ -89,16 +82,6 @@ export default function Notes() {
 			}) || notes[0]
 		);
 	}
-
-	function deleteNote(event, noteId) {
-		event.stopPropagation();
-		setNotes((oldNotes) => oldNotes.filter((note) => note.id !== noteId));
-	}
-
-	useEffect(() => {
-		const currentNote = findCurrentNote();
-		setCurrentTitle(currentNote ? currentNote.title : 'New Note');
-	}, [notes, currentNoteId]);
 
 	return (
 		<main>
@@ -126,12 +109,7 @@ export default function Notes() {
 						/>
 					</button>
 					{currentNoteId && notes.length > 0 && (
-						<Editor
-							currentNote={findCurrentNote()}
-							updateNote={updateNote}
-							updateTitle={updateTitle}
-							title={currentTitle}
-						/>
+						<Editor currentNote={findCurrentNote()} updateNote={updateNote} />
 					)}
 				</>
 			) : (
