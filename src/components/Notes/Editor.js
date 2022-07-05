@@ -3,7 +3,7 @@ import ReactMde from 'react-mde';
 import Showdown from 'showdown';
 import { getDefaultToolbarCommands } from 'react-mde';
 
-export default function Editor({ currentNote, updateNote }) {
+export default function Editor({ currentNote, updateNote, sidebarOpen }) {
 	const [selectedTab, setSelectedTab] = React.useState('write');
 
 	const converter = new Showdown.Converter({
@@ -16,7 +16,7 @@ export default function Editor({ currentNote, updateNote }) {
 	const commands = getDefaultToolbarCommands();
 
 	return (
-		<section className="pane editor">
+		<section className={`pane editor ${sidebarOpen ? '' : 'visible'}`}>
 			<input
 				className="editor-title"
 				type="text"

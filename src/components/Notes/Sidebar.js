@@ -32,7 +32,7 @@ export default function Sidebar(props) {
 		</div>
 	));
 	return (
-		<section className={`pane sidebar`}>
+		<section className={`pane sidebar ${props.sidebarOpen ? '' : 'hidden'}`}>
 			<button className="button" onClick={props.newNote}>
 				Create Note
 			</button>

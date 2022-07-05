@@ -44,9 +44,13 @@
 	width: 30%;
 	height: 100vh;
 	border-right: 1px solid #e7e7e9;
-	animation: slide-animation 0.3s;
+	/* animation: slide-animation 0.3s; */
+	transition: margin-left 0.4s;
 }
 
+.sidebar.hidden {
+	margin-left: -30%;
+}
 .sidebar .button {
 	display: block;
 	width: 70%;
@@ -154,7 +158,7 @@
 	display: grid;
 	place-items: center;
 	transition: background-color 0.3s;
-	animation: slide-animation 0.3s;
+	/* animation: slide-animation 0.3s; */
 	z-index: 2;
 }
 
@@ -205,6 +209,10 @@
 .editor {
 	padding: 16px;
 	width: 70%;
+}
+
+.editor.visible {
+	width: 100%;
 }
 
 .editor-title {
@@ -259,4 +267,27 @@
 
 .mde-preview {
 	border: 1px solid #fff;
+}
+
+@media screen and (max-width: 1000px) {
+	.sidebar {
+		width: 100%;
+	}
+
+	.sidebar.hidden {
+		margin-left: -100%;
+	}
+	.editor {
+		width: 100%;
+		margin-right: -100%;
+	}
+	.editor.visible {
+		padding: 0;
+	}
+	.chevron.closed {
+		margin-left: -28px;
+	}
+	.chevron {
+		margin-left: 0px;
+	}
 }

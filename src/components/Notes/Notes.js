@@ -13,17 +13,25 @@ import {
 	doc,
 	updateDoc,
 	setDoc,
+	onSnapshot,
+	query,
+	orderBy,
+	serverTimestamp,
 } from 'firebase/firestore';
 
 export default function Notes() {
 	const notesRef = collection(db, 'notes');
+	const orderedNotes = query(notesRef, orderBy('createdAt', 'desc'));
 
-	const getNotes = async () => {
-		const data = await getDocs(notesRef);
-		setNotes(data.docs.map((doc) => ({ ...doc.data() })));
-	};
+	useEffect(() => {
+		onSnapshot(orderedNotes, async () => {
+			const data = await getDocs(orderedNotes);
+			const notesArray = data.docs.map((doc) => doc.data());
+			setNotes(notesArray);
+		});
+	}, []);
 
-	const [notes, setNotes] = useState(() => getNotes() || []);
+	const [notes, setNotes] = useState(() => []);
 
 	const [currentNoteId, setCurrentNoteId] = useState(
 		(notes[0] && notes[0].id) || ''
@@ -32,11 +40,6 @@ export default function Notes() {
 	const [sidebarOpen, setSidebarOpen] = useState(true);
 
 	const navigate = useNavigate();
-
-	// useEffect(() => {
-	// 	console.log('get');
-	// 	getNotes();
-	// }, [currentNoteId]);
 
 	// Change route when note changes
 	useEffect(() => {
@@ -60,31 +63,33 @@ export default function Notes() {
 		const id = nanoid();
 		const newNote = {
 			id: id,
+			title: `New Note ${notes.length + 1}`,
 			body: 'Compose an epic...',
 			date: `${new Intl.DateTimeFormat('en-US', options).format(date)}`,
-			title: `New Note ${notes.length + 1}`,
+			createdAt: serverTimestamp(),
 		};
-		setNotes((prevNotes) => [newNote, ...prevNotes]);
-		setCurrentNoteId(newNote.id);
+		// setNotes((prevNotes) => [newNote, ...prevNotes]);
 		await setDoc(doc(db, 'notes', id), newNote);
+		setCurrentNoteId(newNote.id);
+		navigate(`${id}`);
 	};
 
 	const updateNote = async (text) => {
-		setNotes((oldNotes) => {
-			const newArray = [];
-			for (let note of oldNotes) {
-				if (note.id === currentNoteId) {
-					if (typeof text === 'string')
-						newArray.unshift({ ...note, body: text });
-					else {
-						newArray.unshift({ ...note, title: text.target.value });
-					}
-				} else {
-					newArray.push(note);
-				}
-			}
-			return newArray;
-		});
+		// setNotes((oldNotes) => {
+		// 	const newArray = [];
+		// 	for (let note of oldNotes) {
+		// 		if (note.id === currentNoteId) {
+		// 			if (typeof text === 'string')
+		// 				newArray.unshift({ ...note, body: text });
+		// 			else {
+		// 				newArray.unshift({ ...note, title: text.target.value });
+		// 			}
+		// 		} else {
+		// 			newArray.push(note);
+		// 		}
+		// 	}
+		// 	return newArray;
+		// });
 		const userDoc = doc(db, 'notes', currentNoteId);
 		const update =
 			typeof text === 'string' ? { body: text } : { title: text.target.value };
@@ -93,7 +98,7 @@ export default function Notes() {
 
 	const deleteNote = async (event, noteId) => {
 		event.stopPropagation();
-		setNotes((oldNotes) => oldNotes.filter((note) => note.id !== noteId));
+		// setNotes((oldNotes) => oldNotes.filter((note) => note.id !== noteId));
 		const userDoc = doc(db, 'notes', noteId);
 		await deleteDoc(userDoc);
 	};
@@ -110,19 +115,17 @@ export default function Notes() {
 		<main>
 			{notes.length > 0 ? (
 				<>
-					{sidebarOpen && (
-						<Sidebar
-							notes={notes}
-							currentNote={findCurrentNote()}
-							setCurrentNoteId={setCurrentNoteId}
-							currentNoteId={currentNoteId}
-							newNote={createNewNote}
-							deleteNote={deleteNote}
-							sidebarOpen={sidebarOpen}
-						/>
-					)}
+					<Sidebar
+						notes={notes}
+						currentNote={findCurrentNote()}
+						setCurrentNoteId={setCurrentNoteId}
+						currentNoteId={currentNoteId}
+						newNote={createNewNote}
+						deleteNote={deleteNote}
+						sidebarOpen={sidebarOpen}
+					/>
 					<button
-						className={`chevron `}
+						className={`chevron ${!sidebarOpen ? '' : 'closed'}`}
 						onClick={() => setSidebarOpen((prevStatus) => !prevStatus)}
 					>
 						<img
@@ -132,7 +135,11 @@ export default function Notes() {
 						/>
 					</button>
 					{notes.length > 0 && (
-						<Editor currentNote={findCurrentNote()} updateNote={updateNote} />
+						<Editor
+							currentNote={findCurrentNote()}
+							updateNote={updateNote}
+							sidebarOpen={sidebarOpen}
+						/>
 					)}
 				</>
 			) : (

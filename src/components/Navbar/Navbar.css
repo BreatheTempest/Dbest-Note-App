@@ -49,6 +49,26 @@ nav {
 
 @media screen and (max-width: 1000px) {
 	nav {
-		min-width: 130px;
+		display: flex;
+		padding: 10px;
+	}
+	.nav-container {
+		margin-top: 0;
+		margin-left: auto;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.nav-container a {
+		padding-left: 0;
+		padding-top: 9px;
+	}
+	.nav-container a.active {
+		border-left: none;
+		border-top: 3px solid #ec7160;
+		color: #303030;
+		padding-left: 0;
+		padding-top: 6px;
 	}
 }
