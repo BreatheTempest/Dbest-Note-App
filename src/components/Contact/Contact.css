@@ -24,11 +24,13 @@
 	color: #ec7160;
 	transform: translateY(30px);
 	transition: transform 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+	opacity: 0;
 	z-index: -1;
 }
 
 .label p.visible {
 	transform: translateY(0);
+	opacity: 1;
 }
 
 .contact label {
@@ -41,6 +43,19 @@
 .contact input {
 	height: 45px;
 	text-indent: 8px;
+}
+
+#form-name {
+	transform: translateX(-50px);
+	opacity: 0;
+	animation: slide-animation-contact 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28)
+		forwards;
+}
+#form-email {
+	transform: translateX(50px);
+	opacity: 0;
+	animation: slide-animation-contact 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28)
+		forwards;
 }
 
 .contact input:focus,
@@ -58,6 +73,10 @@
 .contact .button {
 	padding-inline: 16px;
 	width: fit-content;
+	animation: slide-animation-contact 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28)
+		0.3s forwards;
+	transform: translateY(30px);
+	opacity: 0;
 }
 
 .span-two {
@@ -95,4 +114,11 @@
 
 .success button {
 	margin-top: 32px;
+}
+
+@keyframes slide-animation-contact {
+	to {
+		transform: translate(0);
+		opacity: 1;
+	}
 }

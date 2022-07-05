@@ -20,7 +20,7 @@ export default function Editor({ currentNote, updateNote }) {
 			<input
 				className="editor-title"
 				type="text"
-				placeholder="New Note"
+				placeholder="Change Title"
 				value={currentNote.title}
 				onChange={(e) => updateNote(e)}
 			/>

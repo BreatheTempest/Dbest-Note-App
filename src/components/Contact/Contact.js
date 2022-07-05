@@ -68,6 +68,7 @@ export default function Contact() {
 					type="text"
 					name="name"
 					className="form-input"
+					id="form-name"
 					value={data.name}
 					required
 				/>
@@ -82,6 +83,7 @@ export default function Contact() {
 					type="text"
 					name="email"
 					className="form-input"
+					id="form-email"
 					value={data.email}
 					required
 				/>

@@ -5,15 +5,25 @@ import Editor from './Editor';
 import './Notes.css';
 import chevron from '../../images/chevron.svg';
 import { useNavigate } from 'react-router-dom';
+import { db } from '../../firebase-config';
+import {
+	collection,
+	getDocs,
+	deleteDoc,
+	doc,
+	updateDoc,
+	setDoc,
+} from 'firebase/firestore';
 
 export default function Notes() {
-	const [notes, setNotes] = useState(
-		() => JSON.parse(localStorage.getItem('notes')) || []
-	);
+	const notesRef = collection(db, 'notes');
 
-	useEffect(() => {
-		localStorage.setItem('notes', JSON.stringify(notes));
-	}, [notes]);
+	const getNotes = async () => {
+		const data = await getDocs(notesRef);
+		setNotes(data.docs.map((doc) => ({ ...doc.data() })));
+	};
+
+	const [notes, setNotes] = useState(() => getNotes() || []);
 
 	const [currentNoteId, setCurrentNoteId] = useState(
 		(notes[0] && notes[0].id) || ''
@@ -22,6 +32,11 @@ export default function Notes() {
 	const [sidebarOpen, setSidebarOpen] = useState(true);
 
 	const navigate = useNavigate();
+
+	// useEffect(() => {
+	// 	console.log('get');
+	// 	getNotes();
+	// }, [currentNoteId]);
 
 	// Change route when note changes
 	useEffect(() => {
@@ -33,7 +48,7 @@ export default function Notes() {
 		}
 	}, [notes]);
 
-	function createNewNote() {
+	const createNewNote = async () => {
 		const options = {
 			year: 'numeric',
 			month: 'long',
@@ -42,17 +57,19 @@ export default function Notes() {
 			minute: 'numeric',
 		};
 		const date = new Date();
+		const id = nanoid();
 		const newNote = {
-			id: nanoid(),
+			id: id,
 			body: 'Compose an epic...',
 			date: `${new Intl.DateTimeFormat('en-US', options).format(date)}`,
 			title: `New Note ${notes.length + 1}`,
 		};
 		setNotes((prevNotes) => [newNote, ...prevNotes]);
 		setCurrentNoteId(newNote.id);
-	}
+		await setDoc(doc(db, 'notes', id), newNote);
+	};
 
-	function updateNote(text) {
+	const updateNote = async (text) => {
 		setNotes((oldNotes) => {
 			const newArray = [];
 			for (let note of oldNotes) {
@@ -68,12 +85,18 @@ export default function Notes() {
 			}
 			return newArray;
 		});
-	}
+		const userDoc = doc(db, 'notes', currentNoteId);
+		const update =
+			typeof text === 'string' ? { body: text } : { title: text.target.value };
+		await updateDoc(userDoc, update);
+	};
 
-	function deleteNote(event, noteId) {
+	const deleteNote = async (event, noteId) => {
 		event.stopPropagation();
 		setNotes((oldNotes) => oldNotes.filter((note) => note.id !== noteId));
-	}
+		const userDoc = doc(db, 'notes', noteId);
+		await deleteDoc(userDoc);
+	};
 
 	function findCurrentNote() {
 		return (
@@ -108,7 +131,7 @@ export default function Notes() {
 							alt=""
 						/>
 					</button>
-					{currentNoteId && notes.length > 0 && (
+					{notes.length > 0 && (
 						<Editor currentNote={findCurrentNote()} updateNote={updateNote} />
 					)}
 				</>
