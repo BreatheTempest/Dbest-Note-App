@@ -92,6 +92,10 @@
 	text-decoration: none;
 }
 
+.note-container {
+	position: relative;
+}
+
 .note {
 	padding: 10px 16px;
 	position: relative;
@@ -175,12 +179,16 @@
 /* Trash icon */
 
 .delete-btn {
+	position: absolute;
+	top: 3px;
+	right: 3px;
 	display: none;
 	background: none;
 	border: none;
 	cursor: pointer;
 	border-radius: 8px;
 	padding: 3px;
+	aspect-ratio: 1;
 	transition: background-color 0.3s;
 }
 
@@ -188,7 +196,7 @@
 	height: 16px;
 }
 
-.note:hover .delete-btn {
+.note-container:hover .delete-btn {
 	display: block;
 }
 

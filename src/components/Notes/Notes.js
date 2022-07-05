@@ -86,6 +86,10 @@ export default function Notes() {
 	}
 
 	useEffect(() => {
+		if (notes.length > 1) navigate(`${findCurrentNote().id}`);
+	}, [notes]);
+
+	useEffect(() => {
 		const currentNote = findCurrentNote();
 		setCurrentTitle(currentNote ? currentNote.title : 'New Note');
 	}, [notes, currentNoteId]);
@@ -99,6 +103,7 @@ export default function Notes() {
 							notes={notes}
 							currentNote={findCurrentNote()}
 							setCurrentNoteId={setCurrentNoteId}
+							currentNoteId={currentNoteId}
 							newNote={createNewNote}
 							deleteNote={deleteNote}
 							sidebarOpen={sidebarOpen}
