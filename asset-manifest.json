@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/Dbest-Note-App/static/css/main.28c69658.css",
-    "main.js": "/Dbest-Note-App/static/js/main.2acd554d.js",
+    "main.css": "/Dbest-Note-App/static/css/main.9cc97bad.css",
+    "main.js": "/Dbest-Note-App/static/js/main.41537d68.js",
     "static/media/orange.png": "/Dbest-Note-App/static/media/orange.387e2ac5371c02942aae.png",
     "static/media/logo.png": "/Dbest-Note-App/static/media/logo.94616fb25009951421b1.png",
     "index.html": "/Dbest-Note-App/index.html",
     "static/media/remove.svg": "/Dbest-Note-App/static/media/remove.45d41f106637a0ec920a305cd2dfda1a.svg",
     "static/media/chevron.svg": "/Dbest-Note-App/static/media/chevron.88e5e5c511dc19ef7e5115117a590d2b.svg",
-    "main.28c69658.css.map": "/Dbest-Note-App/static/css/main.28c69658.css.map",
-    "main.2acd554d.js.map": "/Dbest-Note-App/static/js/main.2acd554d.js.map"
+    "main.9cc97bad.css.map": "/Dbest-Note-App/static/css/main.9cc97bad.css.map",
+    "main.41537d68.js.map": "/Dbest-Note-App/static/js/main.41537d68.js.map"
   },
   "entrypoints": [
-    "static/css/main.28c69658.css",
-    "static/js/main.2acd554d.js"
+    "static/css/main.9cc97bad.css",
+    "static/js/main.41537d68.js"
   ]
 }
