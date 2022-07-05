@@ -23,11 +23,16 @@ export default function Contact() {
 	}
 
 	useEffect(() => {
-		setErrors((prevErrors) => ({
-			...prevErrors,
-			name: !/^[a-zA-Z]+$/.test(data.name),
-			email: !/.+@.+\..+/.test(data.email),
-		}));
+		if (data.name !== '')
+			setErrors((prevErrors) => ({
+				...prevErrors,
+				name: !/^[a-zA-Z]+$/.test(data.name),
+			}));
+		if (data.email !== '')
+			setErrors((prevErrors) => ({
+				...prevErrors,
+				email: !/.+@.+\..+/.test(data.email),
+			}));
 	}, [data]);
 
 	function handleSubmit(e) {
