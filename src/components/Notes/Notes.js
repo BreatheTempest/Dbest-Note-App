@@ -25,6 +25,16 @@ export default function Notes() {
 
 	const navigate = useNavigate();
 
+	// Change route when note changes
+	useEffect(() => {
+		if (notes.length > 0) {
+			navigate(`${findCurrentNote().id}`);
+		}
+		if (notes.length === 0) {
+			navigate('');
+		}
+	}, [notes]);
+
 	function createNewNote() {
 		const options = {
 			year: 'numeric',
@@ -84,10 +94,6 @@ export default function Notes() {
 		event.stopPropagation();
 		setNotes((oldNotes) => oldNotes.filter((note) => note.id !== noteId));
 	}
-
-	useEffect(() => {
-		if (notes.length > 1) navigate(`${findCurrentNote().id}`);
-	}, [notes]);
 
 	useEffect(() => {
 		const currentNote = findCurrentNote();

@@ -26,14 +26,8 @@ export default function Sidebar(props) {
 			<button
 				className="delete-btn"
 				onClick={(e) => {
+					e.stopPropagation();
 					props.deleteNote(e, note.id);
-					if (props.notes.length === 1) navigation('/notes/');
-					else if (note.id === props.currentNoteId && index === 0)
-						navigation(`/notes/${props.notes[1].id}`);
-					else if (note.id !== props.currentNoteId && props.notes.length === 2)
-						navigation(`/notes/${props.notes[1].id}`);
-					else if (note.id === props.currentNoteId)
-						navigation(`/notes/${props.notes[0].id}`);
 				}}
 			>
 				<img src={remove} alt="" />
