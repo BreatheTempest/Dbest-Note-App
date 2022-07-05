@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/Dbest-Note-App/static/css/main.590cf305.css",
-    "main.js": "/Dbest-Note-App/static/js/main.864103a7.js",
+    "main.js": "/Dbest-Note-App/static/js/main.369f61bb.js",
     "static/media/orange.png": "/Dbest-Note-App/static/media/orange.387e2ac5371c02942aae.png",
     "static/media/logo.png": "/Dbest-Note-App/static/media/logo.94616fb25009951421b1.png",
     "index.html": "/Dbest-Note-App/index.html",
     "static/media/remove.svg": "/Dbest-Note-App/static/media/remove.45d41f106637a0ec920a305cd2dfda1a.svg",
     "static/media/chevron.svg": "/Dbest-Note-App/static/media/chevron.88e5e5c511dc19ef7e5115117a590d2b.svg",
     "main.590cf305.css.map": "/Dbest-Note-App/static/css/main.590cf305.css.map",
-    "main.864103a7.js.map": "/Dbest-Note-App/static/js/main.864103a7.js.map"
+    "main.369f61bb.js.map": "/Dbest-Note-App/static/js/main.369f61bb.js.map"
   },
   "entrypoints": [
     "static/css/main.590cf305.css",
-    "static/js/main.864103a7.js"
+    "static/js/main.369f61bb.js"
   ]
 }
