@@ -1,0 +1,122 @@
+.auth-page {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	height: 100vh;
+}
+
+.auth-img > img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.auth-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.auth-container h2 {
+	font-weight: 700;
+	font-size: 30px;
+	color: #000;
+}
+
+.auth-form {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 24px;
+	width: 425px;
+}
+
+.auth-form .from-element {
+	grid-column: span 2;
+}
+
+.auth-form .auth-btn {
+	font-size: 16px;
+	font-weight: 500;
+	grid-column: span 2;
+	height: 64px;
+}
+
+.alt-auth-btn {
+	height: 55px;
+	color: rgba(82, 76, 76, 0.38);
+	font-size: 13px;
+	font-family: Inter, sans-serif;
+	background: #ffffff;
+	border: 0.8px solid rgba(82, 76, 76, 0.38);
+	border-radius: 8px;
+}
+
+.auth-form .line {
+	isolation: isolate;
+	background-color: white;
+	grid-column: span 2;
+	text-align: center;
+	color: #524c4c;
+	position: relative;
+	display: grid;
+	align-items: center;
+	z-index: 2;
+}
+
+.auth-form .line:before {
+	z-index: 0;
+	content: '';
+	background-color: rgba(82, 76, 76, 0.38);
+	position: absolute;
+	height: 1px;
+	width: 100%;
+}
+.auth-form .line:after {
+	z-index: 0;
+	content: '';
+	background-color: red;
+	position: absolute;
+	height: 24px;
+	width: 30px;
+	right: 50%;
+	transform: translateX(50%);
+}
+
+.label p {
+	font-size: 14px;
+	color: #ec7160;
+	transform: translateY(30px);
+	transition: transform 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+	opacity: 0;
+	z-index: -1;
+}
+
+.label p.visible {
+	transform: translateY(0);
+	opacity: 1;
+}
+
+.auth-form label {
+	z-index: -1;
+	display: block;
+	font-size: 13px;
+	color: #898989;
+	margin-bottom: 9px;
+	animation: slide-animation-contact 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28)
+		0.2s forwards;
+	transform: translateY(30px);
+	opacity: 0;
+}
+
+.auth-form input {
+	height: 64px;
+	border-radius: 6px;
+	border: 1px solid #8692a6;
+	background-color: white;
+	text-indent: 8px;
+}
+
+.auth-form input:focus {
+	outline: none;
+	box-shadow: 0px 2px 5px 1px rgb(0 0 0 /0.3);
+}

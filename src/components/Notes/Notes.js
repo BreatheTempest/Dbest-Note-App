@@ -71,7 +71,6 @@ export default function Notes() {
 		// setNotes((prevNotes) => [newNote, ...prevNotes]);
 		await setDoc(doc(db, 'notes', id), newNote);
 		setCurrentNoteId(newNote.id);
-		navigate(`${id}`);
 	};
 
 	const updateNote = async (text) => {
