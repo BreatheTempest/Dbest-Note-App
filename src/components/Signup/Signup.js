@@ -1,18 +1,23 @@
-import './Login.css';
-import loginImage from '../../images/login.svg';
+import loginImage from '../../images/signup.svg';
 import googleIcon from '../../images/google.svg';
 import facebookIcon from '../../images/facebook.svg';
 
 import { auth } from '../../firebase-config';
-import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
+
+import {
+	createUserWithEmailAndPassword,
+	onAuthStateChanged,
+} from 'firebase/auth';
 
 import { useState, useEffect } from 'react';
 
-export default function Login() {
-	const [user, setUser] = useState({});
+export default function Signup() {
+	const [user, setUser] = useState({ email: '' });
 
-	onAuthStateChanged(auth, (currentUser) => {
-		setUser(currentUser);
+	useEffect(() => {
+		onAuthStateChanged(auth, (currentUser) => {
+			setUser(currentUser);
+		});
 	});
 
 	const [data, setData] = useState({
@@ -20,8 +25,8 @@ export default function Login() {
 		email: '',
 	});
 	const [errors, setErrors] = useState({
+		password: false,
 		email: false,
-		success: false,
 	});
 
 	function handleInput(e) {
@@ -38,15 +43,22 @@ export default function Login() {
 				...prevErrors,
 				email: !/.+@.+\..+/.test(data.email),
 			}));
+		if (data.password !== '')
+			setErrors((prevErrors) => ({
+				...prevErrors,
+				password: data.password.length < 6,
+			}));
 	}, [data]);
 
 	function handleSubmit(e) {
 		e.preventDefault();
 
-		if (!errors.name && !errors.email) {
-			signInWithEmailAndPassword(auth, data.email, data.password)
-				.then((e) => console.log(e.user))
-				.catch((err) => console.log(err.message));
+		if (!errors.password && !errors.email) {
+			createUserWithEmailAndPassword(auth, data.email, data.password)
+				.then(console.log('Signed up'))
+				.catch((error) => {
+					console.log(error);
+				});
 		}
 	}
 
@@ -57,8 +69,12 @@ export default function Login() {
 			</div>
 			<div className="form-half">
 				<div className="auth-container">
-					{/* {user.email} */}
-					<h2>Account Login</h2>
+					<h2>Signup</h2>
+					<p>
+						{user && user.email}
+						If you are already a member you can login with your email address
+						and password.
+					</p>
 					<form className="auth-form" onSubmit={handleSubmit}>
 						<button className="alt-auth-btn">
 							<img src={googleIcon} alt="" /> Google account
@@ -88,7 +104,7 @@ export default function Login() {
 							<div className="label">
 								<label htmlFor="Password">Password</label>
 								<p className={errors.password ? 'visible' : ''}>
-									Invalid Password
+									Must be at least 6 characters long
 								</p>
 							</div>
 							<input
@@ -98,12 +114,13 @@ export default function Login() {
 								className="form-input"
 								value={data.password}
 								required
+								autoComplete="password"
 							/>
 						</div>
-						<button className="auth-btn button">Log In</button>
+						<button className="auth-btn button">Sign Up</button>
 					</form>
 					<p className="alternative">
-						Don't have an account? <a href="/signup">Sign up here</a>
+						Already have an account? <a href="/login">Log in here</a>
 					</p>
 				</div>
 			</div>

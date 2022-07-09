@@ -3,6 +3,8 @@ nav {
 	padding: 40px 23px;
 	min-width: 258px;
 	z-index: 1;
+	display: flex;
+	flex-direction: column;
 }
 
 .logo {
@@ -47,10 +49,15 @@ nav {
 	color: #303030;
 }
 
+nav .button {
+	margin-top: auto;
+	padding-inline: 6px;
+}
+
 @media screen and (max-width: 1000px) {
 	nav {
-		display: flex;
 		padding: 10px;
+		flex-direction: row;
 	}
 	.nav-container {
 		margin-top: 0;
@@ -58,6 +65,7 @@ nav {
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		margin-right: 14px;
 	}
 
 	.nav-container a {

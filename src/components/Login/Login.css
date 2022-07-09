@@ -2,32 +2,39 @@
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	height: 100vh;
+	flex: 1;
 }
 
 .auth-img > img {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
+	background-position: top left;
 }
 
-.auth-container {
+.form-half {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 }
 
+.auth-container {
+	width: 425px;
+}
+
 .auth-container h2 {
 	font-weight: 700;
 	font-size: 30px;
 	color: #000;
+	margin-bottom: 29px;
 }
 
 .auth-form {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 24px;
-	width: 425px;
+	width: 100%;
 }
 
 .auth-form .from-element {
@@ -42,6 +49,7 @@
 }
 
 .alt-auth-btn {
+	cursor: pointer;
 	height: 55px;
 	color: rgba(82, 76, 76, 0.38);
 	font-size: 13px;
@@ -49,37 +57,43 @@
 	background: #ffffff;
 	border: 0.8px solid rgba(82, 76, 76, 0.38);
 	border-radius: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	transition: color 0.3s, background-color 0.3s;
+}
+
+.alt-auth-btn:hover {
+	background-color: #ec7160;
+	color: white;
+}
+
+.alt-auth-btn img {
+	width: 20px;
 }
 
 .auth-form .line {
-	isolation: isolate;
-	background-color: white;
 	grid-column: span 2;
-	text-align: center;
 	color: #524c4c;
 	position: relative;
-	display: grid;
+	display: flex;
 	align-items: center;
-	z-index: 2;
+	justify-content: center;
+}
+
+.line p {
+	background-color: white;
+	padding-inline: 10px;
+	z-index: 1;
 }
 
 .auth-form .line:before {
-	z-index: 0;
 	content: '';
 	background-color: rgba(82, 76, 76, 0.38);
 	position: absolute;
 	height: 1px;
 	width: 100%;
-}
-.auth-form .line:after {
-	z-index: 0;
-	content: '';
-	background-color: red;
-	position: absolute;
-	height: 24px;
-	width: 30px;
-	right: 50%;
-	transform: translateX(50%);
 }
 
 .label p {
@@ -119,4 +133,16 @@
 .auth-form input:focus {
 	outline: none;
 	box-shadow: 0px 2px 5px 1px rgb(0 0 0 /0.3);
+}
+
+.alternative {
+	margin-top: 43px;
+	text-align: center;
+	color: #696f79;
+	font-weight: 500;
+}
+
+.alternative a {
+	text-decoration: none;
+	color: #ec7160;
 }
