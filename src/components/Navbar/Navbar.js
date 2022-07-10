@@ -26,7 +26,7 @@ export default function Navbar() {
 				<div className="logo-text">Logo</div>
 			</div>
 			<div className="nav-container">
-				{currentUser && currentUser.email}
+				<p>Hello {currentUser && currentUser.email}!</p>
 				<NavLink to="/">Home</NavLink>
 				<NavLink to="notes">Notes</NavLink>
 				<NavLink to="contact">Contact</NavLink>

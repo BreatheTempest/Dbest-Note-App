@@ -85,11 +85,13 @@ export default function Signup() {
 						<div className="line">
 							<p>Or</p>
 						</div>
-						{error}
 						<div className="from-element">
 							<div className="label">
 								<label htmlFor="email">Email</label>
-								<p className={errors.email ? 'visible' : ''}>Invalid Email</p>
+
+								<p className={errors.email || error ? 'visible' : ''}>
+									{error || 'Invalid Email'}
+								</p>
 							</div>
 							<input
 								onChange={handleInput}

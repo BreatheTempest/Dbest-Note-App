@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './Contact.css';
+import { db } from '../../firebase-config';
+import { collection, setDoc, addDoc } from 'firebase/firestore';
 
 export default function Contact() {
+	const contactRef = collection(db, 'contact');
+
 	const [data, setData] = useState({
 		name: '',
 		email: '',
@@ -35,10 +39,11 @@ export default function Contact() {
 			}));
 	}, [data]);
 
-	function handleSubmit(e) {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 
 		if (!errors.name && !errors.email) {
+			await addDoc(contactRef, data);
 			setData({
 				name: '',
 				email: '',
@@ -51,7 +56,7 @@ export default function Contact() {
 				success: true,
 			});
 		}
-	}
+	};
 
 	return (
 		<form className="contact" onSubmit={(e) => handleSubmit(e)}>
