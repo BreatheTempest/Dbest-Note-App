@@ -1,17 +1,21 @@
 {
   "files": {
-    "main.css": "/Dbest-Note-App/static/css/main.9cc97bad.css",
-    "main.js": "/Dbest-Note-App/static/js/main.41537d68.js",
-    "static/media/orange.png": "/Dbest-Note-App/static/media/orange.387e2ac5371c02942aae.png",
-    "static/media/logo.png": "/Dbest-Note-App/static/media/logo.94616fb25009951421b1.png",
-    "index.html": "/Dbest-Note-App/index.html",
-    "static/media/remove.svg": "/Dbest-Note-App/static/media/remove.45d41f106637a0ec920a305cd2dfda1a.svg",
-    "static/media/chevron.svg": "/Dbest-Note-App/static/media/chevron.88e5e5c511dc19ef7e5115117a590d2b.svg",
-    "main.9cc97bad.css.map": "/Dbest-Note-App/static/css/main.9cc97bad.css.map",
-    "main.41537d68.js.map": "/Dbest-Note-App/static/js/main.41537d68.js.map"
+    "main.css": "/static/css/main.bda4ce91.css",
+    "main.js": "/static/js/main.2bf39c77.js",
+    "static/media/signup.svg": "/static/media/signup.8a748aab63d1ed35e40d3068e3ba4e94.svg",
+    "static/media/login.svg": "/static/media/login.9ca2d0b6ab0becd63172ace82f39beff.svg",
+    "static/media/orange.png": "/static/media/orange.387e2ac5371c02942aae.png",
+    "static/media/logo.png": "/static/media/logo.94616fb25009951421b1.png",
+    "static/media/google.svg": "/static/media/google.b06e6090a8025b051d7ca6454cb6d2e4.svg",
+    "index.html": "/index.html",
+    "static/media/facebook.svg": "/static/media/facebook.26b32d59b3189a13f458d217b1fbd6a0.svg",
+    "static/media/remove.svg": "/static/media/remove.45d41f106637a0ec920a305cd2dfda1a.svg",
+    "static/media/chevron.svg": "/static/media/chevron.88e5e5c511dc19ef7e5115117a590d2b.svg",
+    "main.bda4ce91.css.map": "/static/css/main.bda4ce91.css.map",
+    "main.2bf39c77.js.map": "/static/js/main.2bf39c77.js.map"
   },
   "entrypoints": [
-    "static/css/main.9cc97bad.css",
-    "static/js/main.41537d68.js"
+    "static/css/main.bda4ce91.css",
+    "static/js/main.2bf39c77.js"
   ]
 }
