@@ -2,28 +2,25 @@ import loginImage from '../../images/signup.svg';
 import googleIcon from '../../images/google.svg';
 import facebookIcon from '../../images/facebook.svg';
 
-import { auth } from '../../firebase-config';
-
-import {
-	createUserWithEmailAndPassword,
-	onAuthStateChanged,
-} from 'firebase/auth';
-
 import { useState, useEffect } from 'react';
 
-export default function Signup() {
-	const [user, setUser] = useState({ email: '' });
+import { useAuth } from '../../context/AuthContext';
 
-	useEffect(() => {
-		onAuthStateChanged(auth, (currentUser) => {
-			setUser(currentUser);
-		});
-	});
+import { useNavigate, Link } from 'react-router-dom';
+
+export default function Signup() {
+	const { signup } = useAuth();
+
+	const navigate = useNavigate();
 
 	const [data, setData] = useState({
 		password: '',
 		email: '',
 	});
+
+	const [error, setError] = useState('');
+	const [loading, setLoading] = useState(false);
+
 	const [errors, setErrors] = useState({
 		password: false,
 		email: false,
@@ -50,16 +47,19 @@ export default function Signup() {
 			}));
 	}, [data]);
 
-	function handleSubmit(e) {
+	async function handleSubmit(e) {
 		e.preventDefault();
-
 		if (!errors.password && !errors.email) {
-			createUserWithEmailAndPassword(auth, data.email, data.password)
-				.then(console.log('Signed up'))
-				.catch((error) => {
-					console.log(error);
-				});
+			try {
+				setError('');
+				setLoading(true);
+				await signup(data.email, data.password);
+				navigate('/', { replace: true });
+			} catch {
+				setError('Failed to create an account');
+			}
 		}
+		setLoading(false);
 	}
 
 	return (
@@ -71,7 +71,6 @@ export default function Signup() {
 				<div className="auth-container">
 					<h2>Signup</h2>
 					<p>
-						{user && user.email}
 						If you are already a member you can login with your email address
 						and password.
 					</p>
@@ -86,6 +85,7 @@ export default function Signup() {
 						<div className="line">
 							<p>Or</p>
 						</div>
+						{error}
 						<div className="from-element">
 							<div className="label">
 								<label htmlFor="email">Email</label>
@@ -117,13 +117,17 @@ export default function Signup() {
 								autoComplete="password"
 							/>
 						</div>
-						<button className="auth-btn button">Sign Up</button>
+						<button disabled={loading} className="auth-btn button">
+							Sign Up
+						</button>
 					</form>
 					<p className="alternative">
-						Already have an account? <a href="/login">Log in here</a>
+						Already have an account? <Link to="/login">Log in here</Link>
 					</p>
 				</div>
 			</div>
 		</section>
 	);
 }
+
+// "homepage": "http://BreatheTempest.github.io/Dbest-Note-App",

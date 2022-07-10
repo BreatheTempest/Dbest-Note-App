@@ -6,23 +6,46 @@ import Contact from './components/Contact/Contact';
 import PageNotFound from './components/PageNotFound/PageNotFound';
 import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
-import { useState } from 'react';
+import AuthProvider from './context/AuthContext';
+import RequireAuth from './components/RequireAuth';
 
 export default function App() {
-	const [permitted, setPermitted] = useState(true);
 	return (
 		<div className="container">
-			{permitted && <Navbar />}
-			<Routes>
-				<Route path="/" element={<Home />} />
-				<Route path="notes" element={<Notes />}>
-					<Route path=":note" element={<Notes />} />
-				</Route>
-				<Route path="/contact" element={<Contact />} />
-				<Route path="*" element={<PageNotFound />} />
-				<Route path="/login" element={<Login />} />
-				<Route path="/signup" element={<Signup />} />
-			</Routes>
+			<AuthProvider>
+				<Navbar />
+				<Routes>
+					<Route
+						path="/"
+						element={
+							<RequireAuth>
+								<Home />
+							</RequireAuth>
+						}
+					/>
+					<Route
+						path="notes"
+						element={
+							<RequireAuth>
+								<Notes />
+							</RequireAuth>
+						}
+					>
+						<Route path=":note" element={<Notes />} />
+					</Route>
+					<Route
+						path="/contact"
+						element={
+							<RequireAuth>
+								<Contact />
+							</RequireAuth>
+						}
+					/>
+					<Route path="*" element={<PageNotFound />} />
+					<Route path="/login" element={<Login />} />
+					<Route path="/signup" element={<Signup />} />
+				</Routes>
+			</AuthProvider>
 		</div>
 	);
 }

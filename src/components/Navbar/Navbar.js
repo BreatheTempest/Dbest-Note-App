@@ -1,26 +1,37 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import logo from '../../images/logo.png';
 import './Navbar.css';
-import { auth } from '../../firebase-config';
-import { signOut } from 'firebase/auth';
-import { async } from '@firebase/util';
+import { useAuth } from '../../context/AuthContext';
+import { useState } from 'react';
 
 export default function Navbar() {
-	const logout = async () => {
-		await signOut(auth);
+	const { currentUser, logout } = useAuth();
+	const [error, setError] = useState('');
+
+	const navigate = useNavigate();
+
+	const handleLogout = async () => {
+		setError('');
+		try {
+			await logout();
+			navigate('/login');
+		} catch {
+			setError('Failed to log out');
+		}
 	};
 	return (
-		<nav>
+		<nav style={{ display: currentUser ? '' : 'none' }}>
 			<div className="logo">
 				<img src={logo} alt="" />
 				<div className="logo-text">Logo</div>
 			</div>
 			<div className="nav-container">
+				{currentUser && currentUser.email}
 				<NavLink to="/">Home</NavLink>
 				<NavLink to="notes">Notes</NavLink>
 				<NavLink to="contact">Contact</NavLink>
 			</div>
-			<button className="button" onClick={logout}>
+			<button className="button" onClick={handleLogout}>
 				Log Out
 			</button>
 		</nav>
