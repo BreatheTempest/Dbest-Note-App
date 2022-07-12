@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import './Contact.css';
 import { db } from '../../firebase-config';
-import { collection, setDoc, addDoc } from 'firebase/firestore';
+import { collection, addDoc } from 'firebase/firestore';
 
 export default function Contact() {
 	const contactRef = collection(db, 'contact');
-
 	const [data, setData] = useState({
 		name: '',
 		email: '',
@@ -17,6 +16,7 @@ export default function Contact() {
 		email: false,
 		success: false,
 	});
+	const [loading, setLoading] = useState(false);
 
 	function handleInput(e) {
 		const { name, value } = e.target;
@@ -43,6 +43,7 @@ export default function Contact() {
 		e.preventDefault();
 
 		if (!errors.name && !errors.email) {
+			setLoading(true);
 			await addDoc(contactRef, data);
 			setData({
 				name: '',
@@ -55,6 +56,7 @@ export default function Contact() {
 				email: false,
 				success: true,
 			});
+			setLoading(false);
 		}
 	};
 
@@ -120,6 +122,7 @@ export default function Contact() {
 				<h2>Message sent!</h2>
 				<p>Thank you for your time</p>
 				<button
+					disabled={loading}
 					className="button"
 					onClick={() =>
 						setErrors({

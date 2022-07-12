@@ -6,6 +6,7 @@ import './Notes.css';
 import chevron from '../../images/chevron.svg';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../../firebase-config';
+import { useAuth } from '../../context/AuthContext';
 import {
 	collection,
 	getDocs,
@@ -20,7 +21,9 @@ import {
 } from 'firebase/firestore';
 
 export default function Notes() {
-	const notesRef = collection(db, 'notes');
+	const { currentUser } = useAuth();
+	const userId = currentUser.uid;
+	const notesRef = collection(db, `${userId}-notes`);
 	const orderedNotes = query(notesRef, orderBy('createdAt', 'desc'));
 
 	useEffect(() => {
@@ -68,28 +71,12 @@ export default function Notes() {
 			date: `${new Intl.DateTimeFormat('en-US', options).format(date)}`,
 			createdAt: serverTimestamp(),
 		};
-		// setNotes((prevNotes) => [newNote, ...prevNotes]);
-		await setDoc(doc(db, 'notes', id), newNote);
+		await setDoc(doc(db, `${userId}-notes`, id), newNote);
 		setCurrentNoteId(newNote.id);
 	};
 
 	const updateNote = async (text) => {
-		// setNotes((oldNotes) => {
-		// 	const newArray = [];
-		// 	for (let note of oldNotes) {
-		// 		if (note.id === currentNoteId) {
-		// 			if (typeof text === 'string')
-		// 				newArray.unshift({ ...note, body: text });
-		// 			else {
-		// 				newArray.unshift({ ...note, title: text.target.value });
-		// 			}
-		// 		} else {
-		// 			newArray.push(note);
-		// 		}
-		// 	}
-		// 	return newArray;
-		// });
-		const userDoc = doc(db, 'notes', currentNoteId);
+		const userDoc = doc(db, `${userId}-notes`, currentNoteId);
 		const update =
 			typeof text === 'string' ? { body: text } : { title: text.target.value };
 		await updateDoc(userDoc, update);
@@ -97,8 +84,7 @@ export default function Notes() {
 
 	const deleteNote = async (event, noteId) => {
 		event.stopPropagation();
-		// setNotes((oldNotes) => oldNotes.filter((note) => note.id !== noteId));
-		const userDoc = doc(db, 'notes', noteId);
+		const userDoc = doc(db, `${userId}-notes`, noteId);
 		await deleteDoc(userDoc);
 	};
 
